@@ -103,6 +103,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .auth-toggle{text-align:center;margin-top:1.2rem;font-size:0.82rem;color:var(--text3)}
 .auth-toggle a{color:var(--c);cursor:pointer}
 
+/* ===== PLAYER COUNT SELECTOR ===== */
+.player-count-bar{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.2rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem}
+.player-count-btns{display:flex;gap:0.4rem}
+.pc-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-family:'Orbitron',sans-serif;font-size:0.68rem;font-weight:700;padding:0.35rem 0.75rem;cursor:pointer;transition:all var(--tr);letter-spacing:0.05em}
+.pc-btn:hover{border-color:var(--c);color:var(--c)}
+.pc-btn.on{background:rgba(99,102,241,0.12);border-color:var(--c);color:var(--c);box-shadow:0 0 12px rgba(99,102,241,0.2)}
+
 /* ===== HOME ===== */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1.5rem}
 .stat-card{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:1.2rem;position:relative;overflow:hidden;transition:all var(--tr)}
@@ -156,7 +163,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .hand-lbl{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:0.2em;text-align:center;margin-bottom:0.8rem}
 .cards-row{display:flex;justify-content:center;gap:0.5rem;min-height:108px;align-items:flex-end;flex-wrap:wrap}
 .card{width:70px;height:98px;background:#fff;border-radius:7px;display:flex;flex-direction:column;justify-content:space-between;padding:4px 6px;box-shadow:2px 4px 16px rgba(0,0,0,0.7);flex-shrink:0;font-family:'Rajdhani',sans-serif;font-weight:700;position:relative}
-/* Staggered deal animation — set --delay on each card */
 .card{opacity:0;animation:cardDeal 0.35s cubic-bezier(.34,1.56,.64,1) var(--delay,0s) forwards}
 @keyframes cardDeal{
   0%{opacity:0;transform:translateY(-60px) translateX(var(--src-x,0px)) rotate(var(--src-r,-8deg)) scale(0.7)}
@@ -171,6 +177,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .g-msg{text-align:center;font-family:'Orbitron',sans-serif;font-size:0.88rem;min-height:1.8rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;letter-spacing:0.05em}
 .g-msg.win{color:var(--green);text-shadow:0 0 16px rgba(16,185,129,0.4)}.g-msg.lose{color:var(--red)}.g-msg.push{color:var(--gold)}
 .bj-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.6rem}
+
+/* ===== BLACKJACK MULTI-PLAYER ===== */
+.bj-players-row{display:grid;gap:0.6rem;margin-top:0.8rem}
+.bj-player-slot{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:0.6rem;position:relative}
+.bj-player-slot.active-player{border-color:var(--c);box-shadow:0 0 16px rgba(99,102,241,0.15)}
+.bj-player-slot.you{border-color:rgba(16,185,129,0.25)}
+.bj-slot-label{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:rgba(255,255,255,0.25);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.4rem;display:flex;justify-content:space-between}
+.bj-slot-label .slot-result{font-family:'Orbitron',sans-serif;font-size:0.6rem}
+.bj-slot-label .slot-result.win{color:var(--green)}.bj-slot-label .slot-result.lose{color:var(--red)}.bj-slot-label .slot-result.push{color:var(--gold)}
 
 /* ===== ROULETTE ===== */
 .r-layout{display:grid;grid-template-columns:260px 1fr;gap:1.5rem;align-items:start}
@@ -243,24 +258,29 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .rps-nm{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--text3);letter-spacing:0.1em}
 
 /* ===== POKER ===== */
-.poker-felt{background:radial-gradient(ellipse at center,#0a1f10 0%,#050f08 70%,#020704 100%);border:2px solid rgba(16,185,129,0.1);border-radius:20px;padding:1.5rem 1rem;margin:0.5rem 0 1rem;min-height:380px;position:relative;box-shadow:inset 0 0 100px rgba(0,0,0,0.7)}
+.poker-felt{background:radial-gradient(ellipse at center,#0a1f10 0%,#050f08 70%,#020704 100%);border:2px solid rgba(16,185,129,0.1);border-radius:20px;padding:1.5rem 1rem;margin:0.5rem 0 1rem;min-height:300px;position:relative;box-shadow:inset 0 0 100px rgba(0,0,0,0.7)}
 .poker-community{display:flex;flex-direction:column;align-items:center;gap:0.5rem;margin-bottom:1rem}
 .community-label{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.2);letter-spacing:0.2em;text-transform:uppercase}
 .community-cards{display:flex;gap:0.5rem;justify-content:center;min-height:98px;align-items:flex-end}
-.poker-players{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem}
-.poker-player-area{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.8rem;position:relative}
+.poker-players-row{display:flex;gap:0.8rem;flex-wrap:wrap;justify-content:center;margin-top:0.8rem}
+.poker-player-area{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.8rem;position:relative;flex:1;min-width:130px;max-width:200px}
+.poker-player-area.you-area{border-color:rgba(16,185,129,0.2);min-width:160px}
 .poker-player-area.active-turn{border-color:var(--c);box-shadow:0 0 20px rgba(99,102,241,0.15)}
+.poker-player-area.folded-player{opacity:0.4}
 .poker-player-label{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;display:flex;justify-content:space-between;align-items:center}
 .poker-player-cards{display:flex;gap:0.4rem;justify-content:center;min-height:98px;align-items:flex-end}
 .poker-chips-display{font-family:'Orbitron',sans-serif;font-size:0.7rem;color:var(--gold)}
+.poker-player-status{font-family:'Share Tech Mono',monospace;font-size:0.6rem;text-align:center;margin-top:0.3rem;min-height:1rem}
+.poker-player-status.folded{color:var(--red)}.poker-player-status.called{color:var(--text3)}.poker-player-status.raised{color:var(--gold)}
 .pot-display{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--gold);text-align:center;text-shadow:0 0 20px rgba(245,158,11,0.3);margin:0.5rem 0}
 .pot-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--text3);text-align:center;letter-spacing:0.15em;text-transform:uppercase}
 .poker-actions{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem}
-.poker-msg{text-align:center;font-family:'Orbitron',sans-serif;font-size:0.9rem;min-height:2rem;display:flex;align-items:center;justify-content:center;color:var(--gold);letter-spacing:0.05em;text-shadow:0 0 20px rgba(245,158,11,0.3)}
+.poker-msg{text-align:center;font-family:'Orbitron',sans-serif;font-size:0.9rem;min-height:2rem;display:flex;align-items:center;justify-content:center;color:var(--gold);letter-spacing:0.05em;text-shadow:0 0 20px rgba(245,158,11,0.3);margin-bottom:0.5rem}
 .poker-hand-rank{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--c);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:3px;padding:0.1rem 0.4rem}
 .bet-slider-wrap{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;justify-content:center}
 .bet-slider-wrap input[type=range]{width:140px;accent-color:var(--c);cursor:pointer}
 .raise-amt{font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--gold);min-width:50px;text-align:center}
+.poker-street-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--c);letter-spacing:0.2em;text-align:center;text-transform:uppercase;margin-bottom:0.3rem;min-height:1rem}
 
 /* ===== LEADERBOARD ===== */
 .lb-panel{background:var(--panel2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
@@ -410,18 +430,21 @@ tr:hover td{background:rgba(99,102,241,0.03)}
 
     <!-- BLACKJACK -->
     <div class="page" id="p-blackjack">
-      <div class="game-header"><div class="game-title">🃏 Blackjack</div><div class="game-sub">Beat the dealer · Blackjack pays 3:2 · Dealer stands on soft 17</div></div>
-      <div class="felt">
-        <div class="hand-lbl">Dealer</div>
-        <div class="cards-row" id="bjDealer"></div>
-        <div class="hand-val" id="bjDV"></div>
-        <div style="height:1.2rem"></div>
-        <div class="hand-lbl">You</div>
-        <div class="cards-row" id="bjPlayer"></div>
-        <div class="hand-val" id="bjPV"></div>
-      </div>
-      <div class="g-msg" id="bjMsg"></div>
-      <div id="bjBetBar">
+      <div class="game-header"><div class="game-title">🃏 Blackjack</div><div class="game-sub">Beat the dealer to 21 · Blackjack pays 3:2 · Dealer stands on soft 17</div></div>
+
+      <!-- Player count selector (shown before deal) -->
+      <div id="bjSetupBar">
+        <div class="player-count-bar">
+          <div class="bet-lbl">PLAYERS</div>
+          <div class="player-count-btns" id="bjPlayerBtns">
+            <div class="pc-btn on" onclick="setBJPlayers(1,this)">1</div>
+            <div class="pc-btn" onclick="setBJPlayers(2,this)">2</div>
+            <div class="pc-btn" onclick="setBJPlayers(3,this)">3</div>
+            <div class="pc-btn" onclick="setBJPlayers(4,this)">4</div>
+            <div class="pc-btn" onclick="setBJPlayers(5,this)">5</div>
+          </div>
+          <div class="bet-lbl" style="margin-left:0.5rem;color:var(--text3);font-size:0.55rem">You are always player 1</div>
+        </div>
         <div class="bet-bar">
           <div class="bet-lbl">BET</div>
           <div class="chips" id="bjChips">
@@ -435,6 +458,25 @@ tr:hover td{background:rgba(99,102,241,0.03)}
           <button class="btn green" onclick="dealBJ()">DEAL</button>
         </div>
       </div>
+
+      <div class="felt" id="bjFelt">
+        <div class="hand-lbl">Dealer</div>
+        <div class="cards-row" id="bjDealer"></div>
+        <div class="hand-val" id="bjDV"></div>
+        <div style="height:1rem"></div>
+        <!-- Bot players row -->
+        <div id="bjBotsRow" style="display:none">
+          <div style="height:0.5rem"></div>
+          <div class="bj-players-row" id="bjBotSlots" style="grid-template-columns:repeat(auto-fill,minmax(130px,1fr))"></div>
+          <div style="height:0.8rem"></div>
+        </div>
+        <!-- You -->
+        <div class="hand-lbl" id="bjYouLbl">You</div>
+        <div class="cards-row" id="bjPlayer"></div>
+        <div class="hand-val" id="bjPV"></div>
+      </div>
+
+      <div class="g-msg" id="bjMsg"></div>
       <div class="bj-btns" id="bjActions" style="display:none;padding:0.5rem 0">
         <button class="btn indigo" onclick="bjHit()">HIT</button>
         <button class="btn green" onclick="bjStand()">STAND</button>
@@ -444,37 +486,40 @@ tr:hover td{background:rgba(99,102,241,0.03)}
 
     <!-- POKER -->
     <div class="page" id="p-poker">
-      <div class="game-header"><div class="game-title">♠️ Texas Hold'em</div><div class="game-sub">Play against 2 bots · Best 5-card hand wins</div></div>
-      <div class="poker-felt">
+      <div class="game-header"><div class="game-title">♠️ Texas Hold'em</div><div class="game-sub">Play against bots · Best 5-card hand wins · Cards hidden until showdown</div></div>
+
+      <!-- Setup bar (shown when idle) -->
+      <div id="pkSetupBar">
+        <div class="player-count-bar">
+          <div class="bet-lbl">PLAYERS AT TABLE</div>
+          <div class="player-count-btns" id="pkPlayerBtns">
+            <div class="pc-btn" onclick="setPKPlayers(2,this)">2</div>
+            <div class="pc-btn on" onclick="setPKPlayers(3,this)">3</div>
+            <div class="pc-btn" onclick="setPKPlayers(4,this)">4</div>
+            <div class="pc-btn" onclick="setPKPlayers(5,this)">5</div>
+            <div class="pc-btn" onclick="setPKPlayers(6,this)">6</div>
+          </div>
+          <div class="bet-lbl" style="margin-left:0.5rem;color:var(--text3);font-size:0.55rem">Includes you</div>
+        </div>
+        <div class="poker-actions">
+          <button class="btn green" id="pkDealBtn" onclick="pokerDeal()">DEAL HAND ($20 buy-in)</button>
+        </div>
+      </div>
+
+      <div class="poker-felt" id="pkFelt" style="display:none">
+        <div class="poker-street-label" id="pkStreetLabel"></div>
         <div class="poker-community">
           <div class="community-label">Community Cards</div>
           <div class="community-cards" id="pkCommunity"></div>
         </div>
         <div class="pot-label">POT</div>
         <div class="pot-display" id="pkPot">$0</div>
-        <div class="poker-players">
-          <div class="poker-player-area" id="pkBot1Area">
-            <div class="poker-player-label"><span>Bot 1</span><span class="poker-chips-display" id="pkBot1Chips">$500</span></div>
-            <div class="poker-player-cards" id="pkBot1Cards"></div>
-          </div>
-          <div class="poker-player-area" id="pkBot2Area">
-            <div class="poker-player-label"><span>Bot 2</span><span class="poker-chips-display" id="pkBot2Chips">$500</span></div>
-            <div class="poker-player-cards" id="pkBot2Cards"></div>
-          </div>
-        </div>
-        <div style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:0.8rem;margin-top:1rem" id="pkPlayerArea">
-          <div class="poker-player-label">
-            <span id="pkPlayerName">You</span>
-            <span class="poker-chips-display" id="pkPlayerChips">$0</span>
-          </div>
-          <div class="poker-player-cards" id="pkPlayerCards"></div>
-          <div style="text-align:center;margin-top:0.4rem" id="pkPlayerRank"></div>
-        </div>
+        <!-- All players in one flexible row -->
+        <div class="poker-players-row" id="pkPlayersRow"></div>
       </div>
+
       <div class="poker-msg" id="pkMsg"></div>
-      <div class="poker-actions" id="pkActions">
-        <button class="btn green" id="pkDealBtn" onclick="pokerDeal()">DEAL HAND ($20 buy-in)</button>
-      </div>
+      <div class="poker-actions" id="pkActions" style="display:none"></div>
       <div id="pkRaiseRow" style="display:none;justify-content:center;margin-top:0.6rem" class="bet-slider-wrap">
         <span class="bet-lbl">RAISE TO:</span>
         <input type="range" min="20" max="200" value="40" id="pkRaiseSlider" oninput="document.getElementById('pkRaiseVal').textContent='$'+this.value">
@@ -721,7 +766,6 @@ const DB = {
   async set(path,data) { return fetch(`${DB_URL}/${path}.json`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); },
   async update(path,data) { return fetch(`${DB_URL}/${path}.json`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); },
   async push(path,data) { const r=await fetch(`${DB_URL}/${path}.json`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}); return r.json(); },
-  // SSE streaming — handles both full 'put' (initial load) and 'patch' (incremental updates)
   listen(path, cb) {
     const es = new EventSource(`${DB_URL}/${path}.json`);
     let cache = null;
@@ -731,7 +775,6 @@ const DB = {
         if (d.path === '/' && d.data !== null) { cache = d.data; cb(cache); }
         else if (d.path === '/' && d.data === null) { cache = null; }
         else if (d.data !== null && d.path) {
-          // nested put — merge
           if (!cache) cache = {};
           const key = d.path.replace(/^\//,'');
           cache[key] = d.data; cb(cache);
@@ -739,11 +782,7 @@ const DB = {
       } catch(err) { console.warn('SSE parse err', err); }
     });
     es.addEventListener('patch', e => {
-      try {
-        const d = JSON.parse(e.data);
-        if (!cache) cache = {};
-        Object.assign(cache, d.data); cb(cache);
-      } catch {}
+      try { const d = JSON.parse(e.data); if (!cache) cache = {}; Object.assign(cache, d.data); cb(cache); } catch {}
     });
     es.onerror = () => {};
     return () => es.close();
@@ -763,7 +802,6 @@ async function initApp() {
     const u = await DB.get(`users/${uid}`);
     if (u && u.username) { authSuccess(uid, u.username, u.balance||1000); return; }
   }
-  // Show auth only after loader
   setTimeout(() => { document.getElementById('authOverlay').style.display=''; }, 2700);
   document.getElementById('authOverlay').style.display='none';
 }
@@ -815,7 +853,6 @@ async function authSuccess(uid, username, balance) {
   document.getElementById('authOverlay').style.display = 'none';
   document.getElementById('uname').textContent = username;
   document.getElementById('avatar').textContent = username.slice(0,2).toUpperCase();
-  document.getElementById('pkPlayerName').textContent = username;
   updateBalUI(); refreshStats(); startListeners();
 }
 
@@ -910,7 +947,7 @@ async function onLose(bet,game,result) {
 }
 
 // ============================================================
-// LIVE LISTENERS — fixed SSE parsing
+// LIVE LISTENERS
 // ============================================================
 function startListeners() {
   if(feedUnsub) feedUnsub();
@@ -951,7 +988,6 @@ async function sendChat() {
   const inp=document.getElementById('chatIn');
   const msg=inp.value.trim(); if(!msg) return;
   inp.value='';
-  // Push with explicit string fields to prevent undefined
   await DB.push('chat',{
     uid: String(CU.uid),
     username: String(CU.username),
@@ -991,6 +1027,7 @@ function toast(msg,type='info'){
 }
 function burst(txt){const el=document.createElement('div');el.className='burst';el.textContent=txt;document.body.appendChild(el);setTimeout(()=>el.remove(),1000);}
 function setActive(container,el){container.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+function setActivePCBtn(container,el){container.querySelectorAll('.pc-btn').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
 
 // ============================================================
 // LEADERBOARD
@@ -1026,7 +1063,6 @@ const cVal=c=>{if(!c||c.hidden)return 0;if(['J','Q','K'].includes(c.v))return 10
 function hVal(hand){let t=0,a=0;hand.forEach(c=>{if(!c.hidden){t+=cVal(c);if(c.v==='A')a++;}});while(t>21&&a>0){t-=10;a--;}return t;}
 function fhVal(hand){let t=0,a=0;hand.forEach(c=>{t+=cVal({...c,hidden:false});if(c.v==='A')a++;});while(t>21&&a>0){t-=10;a--;}return t;}
 
-// Staggered deal animation: each card gets a delay
 function mkCardEl(c, delay=0, srcX=0, srcR=-8) {
   const el=document.createElement('div');
   if(c.hidden){el.className='card back';el.style.setProperty('--delay',delay+'s');el.style.setProperty('--src-x',srcX+'px');el.style.setProperty('--src-r',srcR+'deg');return el;}
@@ -1043,44 +1079,103 @@ function dealCardsAnimated(container, cards, startDelay=0, showAll=true) {
   cards.forEach((c,i) => {
     const srcX = (i%2===0?-1:1)*40;
     const srcR = (i%2===0?-1:1)*8;
-    const el = mkCardEl(showAll?c:{...c,hidden:c.hidden}, startDelay + i*0.12, srcX, srcR);
+    const cardToShow = showAll ? c : (c.hidden ? c : c);
+    const el = mkCardEl(cardToShow, startDelay + i*0.12, srcX, srcR);
     container.appendChild(el);
   });
 }
 
 // ============================================================
-// BLACKJACK — fixed payout logic
+// BLACKJACK — Multi-player support
 // ============================================================
 let bjBet=5, bjPhase='bet', bjDeck=[], bjP=[], bjD=[];
+let bjNumPlayers=1; // 1 = just you, 2-5 = you + bots
+let bjBotHands=[]; // array of {cards, stood, busted}
+
+const BOT_NAMES = ['Alex','Sam','Jordan','Riley'];
+
+function setBJPlayers(n, el) {
+  bjNumPlayers = n;
+  setActivePCBtn(document.getElementById('bjPlayerBtns'), el);
+}
 
 function setBJBet(v,el){bjBet=v;document.getElementById('bjBI').value=v;setActive(document.getElementById('bjChips'),el);}
 
-function renderBJ(showAll=false) {
-  dealCardsAnimated(document.getElementById('bjPlayer'), bjP, 0, true);
-  dealCardsAnimated(document.getElementById('bjDealer'), bjD, 0.1, showAll);
-  // For dealer with hidden card, reveal what's visible
-  if(!showAll) {
+function renderBJ(showDealerAll=false) {
+  // Dealer cards
+  dealCardsAnimated(document.getElementById('bjDealer'), bjD, 0, showDealerAll);
+  if(!showDealerAll) {
     const vis = bjD.filter(c=>!c.hidden);
     document.getElementById('bjDV').textContent = (hVal(vis)||'') + (bjD.some(c=>c.hidden)?' + ?':'');
   } else {
     document.getElementById('bjDV').textContent = fhVal(bjD)||'';
   }
-  document.getElementById('bjPV').textContent = hVal(bjP)||'';
-}
 
-function setGMsg(id,txt,cls=''){const e=document.getElementById(id);e.textContent=txt;e.className='g-msg '+cls;}
+  // Player cards
+  dealCardsAnimated(document.getElementById('bjPlayer'), bjP, 0, true);
+  document.getElementById('bjPV').textContent = hVal(bjP)||'';
+
+  // Bot slots
+  const botsRow = document.getElementById('bjBotsRow');
+  const botsSlots = document.getElementById('bjBotSlots');
+  if(bjBotHands.length > 0) {
+    botsRow.style.display = 'block';
+    botsSlots.innerHTML = '';
+    bjBotHands.forEach((bot, i) => {
+      const slot = document.createElement('div');
+      slot.className = 'bj-player-slot';
+      const val = fhVal(bot.cards);
+      const lbl = document.createElement('div');
+      lbl.className = 'bj-slot-label';
+      lbl.innerHTML = `<span>${BOT_NAMES[i]}</span>`;
+      // Show bot result if showDealerAll (round over)
+      if(showDealerAll && bot.result) {
+        const rs = document.createElement('span');
+        rs.className = 'slot-result ' + bot.result.cls;
+        rs.textContent = bot.result.text;
+        lbl.appendChild(rs);
+      }
+      slot.appendChild(lbl);
+      const cardsRow = document.createElement('div');
+      cardsRow.className = 'cards-row';
+      cardsRow.style.minHeight = '80px';
+      bot.cards.forEach((c,ci)=>{
+        const srcX = (ci%2===0?-1:1)*40;
+        const el = mkCardEl(c, ci*0.1, srcX, (ci%2===0?-1:1)*8);
+        cardsRow.appendChild(el);
+      });
+      slot.appendChild(cardsRow);
+      const valEl = document.createElement('div');
+      valEl.className='hand-val';
+      valEl.style.fontSize='0.75rem';
+      valEl.textContent = val > 0 ? val : '';
+      slot.appendChild(valEl);
+      botsSlots.appendChild(slot);
+    });
+  } else {
+    botsRow.style.display = 'none';
+  }
+}
 
 async function dealBJ() {
   if(!CU) return;
   const bet=+(document.getElementById('bjBI').value)||bjBet; bjBet=bet;
   if(!await spend(bet)) return;
   if(bjDeck.length<52) bjDeck=mkDeck();
+
+  // Deal bot hands
+  bjBotHands = [];
+  for(let i=0; i<bjNumPlayers-1; i++) {
+    bjBotHands.push({cards:[bjDeck.pop(), bjDeck.pop()], stood:false, busted:false, result:null});
+  }
+
   bjP=[bjDeck.pop(),bjDeck.pop()];
   bjD=[bjDeck.pop(),{...bjDeck.pop(),hidden:true}];
   bjPhase='play'; setGMsg('bjMsg','');
   renderBJ(false);
-  document.getElementById('bjBetBar').style.display='none';
+  document.getElementById('bjSetupBar').style.display='none';
   document.getElementById('bjActions').style.display='';
+  // Check player blackjack
   if(hVal(bjP)===21) setTimeout(()=>bjReveal(),400);
 }
 
@@ -1101,41 +1196,64 @@ async function bjDouble() {
   setTimeout(()=>bjReveal(hVal(bjP)>21),400);
 }
 
-async function bjReveal(busted=false) {
+async function bjReveal(playerBusted=false) {
   bjPhase='done';
   bjD.forEach(c=>delete c.hidden);
-  if(!busted) while(fhVal(bjD)<17) bjD.push(bjDeck.pop());
-  renderBJ(true);
 
-  const pv=fhVal(bjP), dv=fhVal(bjD);
+  // Play out bot hands (simple bot: hit until 17+)
+  bjBotHands.forEach(bot => {
+    while(fhVal(bot.cards)<17 && bjDeck.length) bot.cards.push(bjDeck.pop());
+    bot.busted = fhVal(bot.cards) > 21;
+  });
+
+  // Dealer draws
+  if(!playerBusted) while(fhVal(bjD)<17) bjD.push(bjDeck.pop());
+
+  const dv = fhVal(bjD);
+  const pv = fhVal(bjP);
   const pBJ = pv===21 && bjP.length===2;
   const dBJ = dv===21 && bjD.length===2;
 
-  // FIXED PAYOUT LOGIC:
-  // Blackjack: player gets back bet + 1.5x bet = 2.5x bet total
-  // Normal win: player gets back bet + bet = 2x bet total
-  // Push: player gets back bet only
-  // onWin(bet, profit, game, result) — profit = amount WON (not including stake return)
-  // earn() also returns the stake, so onWin only tracks profit
+  // Resolve bot outcomes for display
+  bjBotHands.forEach(bot => {
+    const bv = fhVal(bot.cards);
+    const bBJ = bv===21 && bot.cards.length===2;
+    if(bot.busted) {
+      bot.result = {text:'BUST', cls:'lose'};
+    } else if(dBJ && !bBJ) {
+      bot.result = {text:'LOSE', cls:'lose'};
+    } else if(bBJ && !dBJ) {
+      bot.result = {text:'BJ!', cls:'win'};
+    } else if(dv>21) {
+      bot.result = {text:'WIN', cls:'win'};
+    } else if(bv > dv) {
+      bot.result = {text:'WIN', cls:'win'};
+    } else if(bv === dv) {
+      bot.result = {text:'PUSH', cls:'push'};
+    } else {
+      bot.result = {text:'LOSE', cls:'lose'};
+    }
+  });
+
+  renderBJ(true);
 
   let profit=0, msg='', cls='lose', result;
 
-  if(busted) { msg='Bust! You lose.'; result='Bust'; }
+  if(playerBusted) { msg='Bust! You lose.'; result='Bust'; }
   else if(pBJ && !dBJ) {
-    profit = Math.floor(bjBet * 1.5);   // 3:2 — win 1.5x the bet
+    profit = Math.floor(bjBet * 1.5);
     msg = 'Blackjack! 🎉'; cls='win'; result='Blackjack';
   } else if(dBJ && !pBJ) {
     msg = 'Dealer Blackjack!'; result='Dealer BJ';
   } else if(dv>21) {
-    profit = bjBet;                      // win = 1:1
+    profit = bjBet;
     msg = 'Dealer busts! You win!'; cls='win'; result=`Dealer bust (${dv})`;
   } else if(pv>dv) {
-    profit = bjBet;                      // win = 1:1
+    profit = bjBet;
     msg = 'You win!'; cls='win'; result=`${pv} vs ${dv}`;
   } else if(pv===dv) {
-    profit = 0;
-    msg = 'Push'; cls='push'; result='Push';
-    await earn(bjBet); // return stake on push
+    profit = 0; msg = 'Push'; cls='push'; result='Push';
+    await earn(bjBet);
   } else {
     msg = 'Dealer wins'; result=`${dv} vs ${pv}`;
   }
@@ -1143,199 +1261,331 @@ async function bjReveal(busted=false) {
   setGMsg('bjMsg', msg, cls);
 
   if(cls==='win') {
-    await earn(bjBet + profit); // return stake + profit
+    await earn(bjBet + profit);
     await onWin(bjBet, profit, 'Blackjack', result);
   } else if(cls!=='push') {
     await onLose(bjBet, 'Blackjack', result);
   }
 
   setTimeout(()=>{
-    bjPhase='bet'; bjP=[]; bjD=[];
+    bjPhase='bet'; bjP=[]; bjD=[]; bjBotHands=[];
     document.getElementById('bjPlayer').innerHTML='';
     document.getElementById('bjDealer').innerHTML='';
+    document.getElementById('bjBotsRow').style.display='none';
     document.getElementById('bjPV').textContent='';
     document.getElementById('bjDV').textContent='';
-    document.getElementById('bjBetBar').style.display='';
+    document.getElementById('bjSetupBar').style.display='';
     document.getElementById('bjActions').style.display='none';
     setGMsg('bjMsg','');
-  },2200);
+  },3000);
 }
 
 // ============================================================
-// POKER — Texas Hold'em vs 2 Bots
+// POKER — Texas Hold'em vs N-1 Bots, cards hidden until showdown
 // ============================================================
-let pkDeck=[], pkPlayerHand=[], pkBot1Hand=[], pkBot2Hand=[], pkCommunity=[];
-let pkPot=0, pkPlayerChips=0, pkBot1Chips=500, pkBot2Chips=500;
-let pkPhase='idle'; // idle, preflop, flop, turn, river, showdown
-let pkCurrentBet=20, pkPlayerBet=0, pkBot1Bet=0, pkBot2Bet=0;
-let pkBuyIn=20;
+let pkDeck=[], pkNumPlayers=3;
+// Player state: {name, isHuman, hand:[cards], chips, bet, folded, status}
+let pkPlayers=[], pkCommunity=[], pkPot=0, pkPhase='idle';
+let pkCurrentBet=20, pkBuyIn=20;
+const PK_BOT_NAMES=['Alex','Sam','Jordan','Riley','Casey'];
 
-function renderPokerHands(revealBots=false) {
-  dealCardsAnimated(document.getElementById('pkPlayerCards'), pkPlayerHand, 0, true);
-  dealCardsAnimated(document.getElementById('pkBot1Cards'), pkBot1Hand, 0.1, revealBots);
-  dealCardsAnimated(document.getElementById('pkBot2Cards'), pkBot2Hand, 0.2, revealBots);
+function setPKPlayers(n, el) {
+  pkNumPlayers = n;
+  setActivePCBtn(document.getElementById('pkPlayerBtns'), el);
+}
+
+function renderPoker(showBotCards=false) {
+  // Community cards
   dealCardsAnimated(document.getElementById('pkCommunity'), pkCommunity, 0, true);
   document.getElementById('pkPot').textContent='$'+pkPot;
-  document.getElementById('pkBot1Chips').textContent='$'+pkBot1Chips;
-  document.getElementById('pkBot2Chips').textContent='$'+pkBot2Chips;
-  document.getElementById('pkPlayerChips').textContent='$'+pkPlayerChips;
-  // Show player hand rank
-  if(pkPlayerHand.length>=2 && pkCommunity.length>=0) {
-    const rank = evaluateHand([...pkPlayerHand,...pkCommunity]);
-    document.getElementById('pkPlayerRank').innerHTML=`<span class="poker-hand-rank">${rank.name}</span>`;
-  }
+
+  // Players row
+  const row = document.getElementById('pkPlayersRow');
+  row.innerHTML='';
+  pkPlayers.forEach((p, idx) => {
+    const area = document.createElement('div');
+    area.className='poker-player-area' + (p.isHuman?' you-area':'');
+    if(p.folded) area.classList.add('folded-player');
+
+    const lbl = document.createElement('div');
+    lbl.className='poker-player-label';
+    lbl.innerHTML=`<span>${esc(p.name)}</span><span class="poker-chips-display">$${p.chips}</span>`;
+    area.appendChild(lbl);
+
+    const cardsDiv = document.createElement('div');
+    cardsDiv.className='poker-player-cards';
+    // Human: always show own cards. Bots: show backs unless showBotCards=true (showdown) or folded
+    const reveal = p.isHuman || showBotCards;
+    p.hand.forEach((c,ci)=>{
+      const cardData = reveal ? c : {...c, hidden:true};
+      const el = mkCardEl(cardData, ci*0.1, (ci===0?-1:1)*30, (ci===0?-1:1)*8);
+      cardsDiv.appendChild(el);
+    });
+    area.appendChild(cardsDiv);
+
+    // Hand rank (only for human, or at showdown)
+    if(p.isHuman && pkCommunity.length > 0) {
+      const rank = evaluateHand([...p.hand,...pkCommunity]);
+      const rankEl = document.createElement('div');
+      rankEl.style.textAlign='center'; rankEl.style.marginTop='0.3rem';
+      rankEl.innerHTML=`<span class="poker-hand-rank">${rank.name}</span>`;
+      area.appendChild(rankEl);
+    }
+    // At showdown, show all ranks
+    if(showBotCards && !p.isHuman && !p.folded && pkCommunity.length > 0) {
+      const rank = evaluateHand([...p.hand,...pkCommunity]);
+      const rankEl = document.createElement('div');
+      rankEl.style.textAlign='center'; rankEl.style.marginTop='0.3rem';
+      rankEl.innerHTML=`<span class="poker-hand-rank" style="color:var(--red)">${rank.name}</span>`;
+      area.appendChild(rankEl);
+    }
+
+    const statusEl = document.createElement('div');
+    statusEl.className='poker-player-status ' + (p.statusCls||'');
+    statusEl.textContent = p.folded ? 'FOLDED' : (p.status||'');
+    area.appendChild(statusEl);
+
+    row.appendChild(area);
+  });
 }
 
 async function pokerDeal() {
   if(!CU) return;
   if(!await spend(pkBuyIn)) return;
-  pkPlayerChips = pkBuyIn;
-  pkBot1Chips = 500; pkBot2Chips = 500;
 
-  pkDeck = mkDeck().slice(0,52); // single deck for poker
-  pkPlayerHand=[pkDeck.pop(),pkDeck.pop()];
-  pkBot1Hand=[pkDeck.pop(),pkDeck.pop()];
-  pkBot2Hand=[pkDeck.pop(),pkDeck.pop()];
-  pkCommunity=[];
-  pkPot=pkBuyIn*3; // small blind structure simplified
-  pkPhase='preflop';
-  pkCurrentBet=pkBuyIn;
+  pkDeck = mkDeck().slice(0,52);
+  pkCommunity = [];
+  pkPot = pkBuyIn * pkNumPlayers; // simplified: everyone posts same buy-in
+  pkCurrentBet = pkBuyIn;
+  pkPhase = 'preflop';
 
-  renderPokerHands(false);
-  setGMsg('pkMsg','');
-  document.getElementById('pkMsg').textContent='';
-  document.getElementById('pkMsg').className='poker-msg';
-  showPokerActions('preflop');
+  // Build players array: human first, then bots
+  pkPlayers = [];
+  pkPlayers.push({
+    name: CU ? CU.username : 'You',
+    isHuman: true,
+    hand: [pkDeck.pop(), pkDeck.pop()],
+    chips: pkBuyIn,
+    folded: false,
+    status: '',
+    statusCls: ''
+  });
+  for(let i=0; i<pkNumPlayers-1; i++) {
+    pkPlayers.push({
+      name: PK_BOT_NAMES[i] || ('Bot '+(i+1)),
+      isHuman: false,
+      hand: [pkDeck.pop(), pkDeck.pop()],
+      chips: 500,
+      folded: false,
+      status: '',
+      statusCls: ''
+    });
+  }
+
+  document.getElementById('pkSetupBar').style.display='none';
+  document.getElementById('pkFelt').style.display='block';
+  document.getElementById('pkRaiseRow').style.display='none';
+
+  renderPoker(false);
+  setStreetLabel('Pre-Flop');
+  document.getElementById('pkMsg').textContent='Your turn. Check, raise, or fold.';
+  showPokerActionBtns();
 }
 
-function showPokerActions(phase) {
-  const acts = document.getElementById('pkActions');
-  const raiseRow = document.getElementById('pkRaiseRow');
-  acts.innerHTML='';
-  raiseRow.style.display='none';
+function setStreetLabel(txt) {
+  document.getElementById('pkStreetLabel').textContent = txt;
+}
 
-  if(phase==='idle'||phase==='done') {
-    const b=document.createElement('button');
-    b.className='btn green';b.id='pkDealBtn';
-    b.textContent=`DEAL HAND ($${pkBuyIn} buy-in)`;
-    b.onclick=pokerDeal; acts.appendChild(b); return;
-  }
+function showPokerActionBtns() {
+  const acts = document.getElementById('pkActions');
+  acts.style.display='flex';
+  acts.innerHTML='';
+  if(pkPhase==='idle'||pkPhase==='done') return;
 
   const addBtn=(label,cls,fn)=>{const b=document.createElement('button');b.className='btn '+cls;b.textContent=label;b.onclick=fn;acts.appendChild(b);};
   addBtn('FOLD','red',pokerFold);
-  addBtn('CALL / CHECK','indigo',pokerCall);
+  addBtn('CHECK / CALL','indigo',pokerCall);
+
+  const raiseRow=document.getElementById('pkRaiseRow');
   raiseRow.style.display='flex';
   const slider=document.getElementById('pkRaiseSlider');
-  slider.min=pkCurrentBet*2; slider.max=Math.max(pkCurrentBet*2, pkPlayerChips);
+  slider.min=pkCurrentBet*2;
+  slider.max=Math.max(pkCurrentBet*2,400);
   slider.value=pkCurrentBet*2;
   document.getElementById('pkRaiseVal').textContent='$'+slider.value;
 }
 
+function hidePokerActionBtns() {
+  document.getElementById('pkActions').style.display='none';
+  document.getElementById('pkRaiseRow').style.display='none';
+}
+
 function pokerFold() {
+  pkPlayers[0].folded=true;
+  pkPlayers[0].status='FOLDED';
+  pkPlayers[0].statusCls='folded';
   pkPhase='done';
-  document.getElementById('pkMsg').textContent='You folded. Bots win the pot.';
-  document.getElementById('pkMsg').className='poker-msg';
+  hidePokerActionBtns();
+  document.getElementById('pkMsg').textContent='You folded.';
+  renderPoker(false);
   onLose(pkBuyIn,'Poker','Folded');
-  showPokerActions('done');
+  // Show reset button after delay
+  setTimeout(()=>{
+    document.getElementById('pkMsg').textContent='You folded. Bots win the pot.';
+    showPokerDoneBtn();
+  }, 800);
 }
 
 async function pokerCall() {
-  // Progress through streets
+  // Player checks/calls. Bots act, then advance street.
   if(pkPhase==='preflop') {
-    pkCommunity=[pkDeck.pop(),pkDeck.pop(),pkDeck.pop()]; // flop
+    document.getElementById('pkMsg').textContent=''; 
+    botsPreAct();
+    await delay(900);
+    pkCommunity=[pkDeck.pop(),pkDeck.pop(),pkDeck.pop()];
     pkPhase='flop';
-    renderPokerHands(false);
-    showPokerActions('flop');
-    // Bots act
-    setTimeout(botAct,600);
+    renderPoker(false);
+    setStreetLabel('Flop');
+    botsActStreet();
+    await delay(900);
+    showPokerActionBtns();
+    document.getElementById('pkMsg').textContent='Your turn.';
   } else if(pkPhase==='flop') {
-    pkCommunity.push(pkDeck.pop()); // turn
+    botsPreAct();
+    await delay(900);
+    pkCommunity.push(pkDeck.pop());
     pkPhase='turn';
-    renderPokerHands(false);
-    showPokerActions('turn');
-    setTimeout(botAct,600);
+    renderPoker(false);
+    setStreetLabel('Turn');
+    botsActStreet();
+    await delay(900);
+    showPokerActionBtns();
+    document.getElementById('pkMsg').textContent='Your turn.';
   } else if(pkPhase==='turn') {
-    pkCommunity.push(pkDeck.pop()); // river
+    botsPreAct();
+    await delay(900);
+    pkCommunity.push(pkDeck.pop());
     pkPhase='river';
-    renderPokerHands(false);
-    showPokerActions('river');
-    setTimeout(botAct,600);
+    renderPoker(false);
+    setStreetLabel('River');
+    botsActStreet();
+    await delay(900);
+    showPokerActionBtns();
+    document.getElementById('pkMsg').textContent='Your turn — last chance!';
   } else if(pkPhase==='river') {
+    hidePokerActionBtns();
     pkPhase='showdown';
+    setStreetLabel('Showdown');
     await pokerShowdown();
   }
 }
 
 function pokerRaise() {
   const amt = +document.getElementById('pkRaiseSlider').value;
-  pkPot += amt;
+  pkPot += amt - pkCurrentBet;
   pkCurrentBet = amt;
-  document.getElementById('pkPot').textContent='$'+pkPot;
+  // Bots call or fold
+  pkPlayers.filter(p=>!p.isHuman).forEach(p=>{
+    if(!p.folded) {
+      if(Math.random()>0.35) {
+        p.status='CALLED'; p.statusCls='called';
+      } else {
+        p.folded=true; p.status='FOLDED'; p.statusCls='folded';
+      }
+    }
+  });
+  renderPoker(false);
   toast('Raised to $'+amt,'info');
-  // Bots call 50% of the time
-  if(Math.random()>0.5) { toast('Bot calls','info'); }
-  else { toast('Bot folds','info'); }
-  // Continue street
-  pokerCall();
+  // Continue to next street
+  setTimeout(()=>pokerCall(), 600);
 }
 
-function botAct() {
-  // Simple bot logic — calls/checks most of the time, occasionally raises
-  const action = Math.random();
-  if(action < 0.6) {
-    document.getElementById('pkMsg').textContent='Bots check.';
-  } else if(action < 0.85) {
-    const raise = pkCurrentBet * (1 + Math.floor(Math.random()*2));
-    pkPot += raise;
-    pkCurrentBet = Math.max(pkCurrentBet, raise);
-    document.getElementById('pkMsg').textContent=`Bot 1 raises to $${raise}.`;
-    document.getElementById('pkPot').textContent='$'+pkPot;
-  } else {
-    document.getElementById('pkMsg').textContent='Bot 2 re-raises.';
-    pkPot += pkCurrentBet;
-  }
+const delay = ms => new Promise(res=>setTimeout(res,ms));
+
+function botsPreAct() {
+  pkPlayers.filter(p=>!p.isHuman&&!p.folded).forEach(p=>{
+    const r=Math.random();
+    if(r<0.15) { p.folded=true; p.status='FOLDED'; p.statusCls='folded'; }
+    else { p.status='CALLED'; p.statusCls='called'; }
+  });
+  renderPoker(false);
+}
+
+function botsActStreet() {
+  pkPlayers.filter(p=>!p.isHuman&&!p.folded).forEach(p=>{
+    const r=Math.random();
+    if(r<0.12) { p.folded=true; p.status='FOLDED'; p.statusCls='folded'; }
+    else if(r<0.3) { p.status='RAISED'; p.statusCls='raised'; pkPot+=pkCurrentBet; }
+    else { p.status='CHECKED'; p.statusCls='called'; }
+  });
+  renderPoker(false);
 }
 
 async function pokerShowdown() {
-  renderPokerHands(true); // reveal bot cards
+  // Reveal all non-folded bot cards
+  renderPoker(true);
 
-  const playerRank = evaluateHand([...pkPlayerHand,...pkCommunity]);
-  const bot1Rank   = evaluateHand([...pkBot1Hand,...pkCommunity]);
-  const bot2Rank   = evaluateHand([...pkBot2Hand,...pkCommunity]);
+  const active = pkPlayers.filter(p=>!p.folded);
+  let bestScore = -1, winner = null;
 
-  const best = Math.max(playerRank.score, bot1Rank.score, bot2Rank.score);
-  const msgEl = document.getElementById('pkMsg');
-  msgEl.className='poker-msg';
+  active.forEach(p=>{
+    const r = evaluateHand([...p.hand,...pkCommunity]);
+    p._rank = r;
+    if(r.score > bestScore) { bestScore=r.score; winner=p; }
+  });
 
-  if(playerRank.score === best && playerRank.score > bot1Rank.score && playerRank.score > bot2Rank.score) {
-    // Player wins
+  const msgEl=document.getElementById('pkMsg');
+  const human = pkPlayers[0];
+
+  if(winner && winner.isHuman) {
     const winAmt = pkPot - pkBuyIn;
-    msgEl.textContent=`You win with ${playerRank.name}! +$${winAmt}`;
+    msgEl.textContent=`You win with ${human._rank.name}! +$${winAmt}`;
     await earn(pkPot);
-    await onWin(pkBuyIn, winAmt, 'Poker', playerRank.name);
-  } else if(playerRank.score === best) {
-    // Tie — split
-    const share = Math.floor(pkPot/2);
-    msgEl.textContent=`Split pot! ${playerRank.name}. +$${share-pkBuyIn}`;
-    await earn(share);
-    await recordGame(true, pkBuyIn, share-pkBuyIn);
-    await pushFeed('Poker', pkBuyIn, true, 'Split: '+playerRank.name);
+    await onWin(pkBuyIn, winAmt, 'Poker', human._rank.name);
+  } else if(winner) {
+    const humanRank = human.folded ? 'Folded' : (human._rank ? human._rank.name : 'Unknown');
+    msgEl.textContent=`${winner.name} wins with ${winner._rank.name}. Your hand: ${humanRank}`;
+    if(!human.folded) await onLose(pkBuyIn,'Poker', humanRank+' vs '+winner._rank.name);
   } else {
-    msgEl.textContent=`Bot wins with ${best===bot1Rank.score?bot1Rank.name:bot2Rank.name}. Your hand: ${playerRank.name}`;
-    await onLose(pkBuyIn,'Poker',playerRank.name+' vs '+bot1Rank.name);
+    // Split
+    const share=Math.floor(pkPot/active.length);
+    msgEl.textContent=`Split pot! $${share} each.`;
+    await earn(share);
+    await recordGame(true,pkBuyIn,share-pkBuyIn);
+    await pushFeed('Poker',pkBuyIn,true,'Split');
   }
 
   pkPhase='done';
-  showPokerActions('done');
+  setTimeout(showPokerDoneBtn, 1200);
 }
 
-// Hand evaluator — returns {name, score}
+function showPokerDoneBtn() {
+  const acts = document.getElementById('pkActions');
+  acts.style.display='flex';
+  acts.innerHTML='';
+  const b=document.createElement('button');
+  b.className='btn green';
+  b.textContent='NEW HAND';
+  b.onclick=()=>{
+    pkPlayers=[];
+    document.getElementById('pkFelt').style.display='none';
+    document.getElementById('pkSetupBar').style.display='';
+    document.getElementById('pkCommunity').innerHTML='';
+    document.getElementById('pkPlayersRow').innerHTML='';
+    document.getElementById('pkPot').textContent='$0';
+    document.getElementById('pkMsg').textContent='';
+    document.getElementById('pkStreetLabel').textContent='';
+    acts.style.display='none';
+    pkPhase='idle';
+  };
+  acts.appendChild(b);
+}
+
+// Hand evaluator
 function evaluateHand(cards) {
   if(!cards||cards.length<2) return {name:'High Card',score:0};
-  // Use all cards, find best 5-card hand
   const all = cards.filter(c=>!c.hidden);
   if(all.length<2) return {name:'High Card',score:0};
-
   const rankMap={'A':14,'K':13,'Q':12,'J':11,'10':10,'9':9,'8':8,'7':7,'6':6,'5':5,'4':4,'3':3,'2':2};
   const nums = all.map(c=>rankMap[c.v]||0).sort((a,b)=>b-a);
   const suits = all.map(c=>c.s);
@@ -1347,7 +1597,6 @@ function evaluateHand(cards) {
   const isFlush = Object.values(suitCounts).some(v=>v>=5);
   const uniq = [...new Set(nums)].sort((a,b)=>b-a);
   const isStraight = uniq.length>=5 && (uniq[0]-uniq[4]===4 || (uniq[0]===14&&uniq[1]===5&&uniq[2]===4&&uniq[3]===3&&uniq[4]===2));
-
   if(isFlush && isStraight && nums[0]===14) return {name:'Royal Flush',score:900};
   if(isFlush && isStraight) return {name:'Straight Flush',score:800+nums[0]};
   if(freq[0]===4) return {name:'Four of a Kind',score:700+nums[0]};
@@ -1423,12 +1672,10 @@ async function spinR(){
   rSpinning=true; document.getElementById('rSpinBtn').disabled=true;
   document.getElementById('rResult').textContent='—';document.getElementById('rResult').className='r-result';
   document.getElementById('rMsg').textContent='';
-
   const idx=Math.floor(Math.random()*R_ORDER.length),num=R_ORDER[idx];
   const sa=(2*Math.PI)/R_ORDER.length,target=-(idx*sa)+Math.PI/2;
   const spins=5+Math.random()*3,final=rAngle+spins*2*Math.PI+(target-(rAngle%(2*Math.PI)));
   const t0=performance.now(),dur=4200,a0=rAngle;
-
   function animate(now){
     const t=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-t,4);
     rAngle=a0+(final-a0)*ease; drawWheel(rAngle);
@@ -1578,11 +1825,9 @@ async function dropPlinko(){
   if(!await spend(bet))return;
   pRunning=true; document.getElementById('pDropBtn').disabled=true;
   document.getElementById('pMsg').textContent='';
-
   const cv=document.getElementById('pCanvas'),W=cv.width;
   let ball={x:W/2+(Math.random()-0.5)*10,y:8,vx:0,vy:2.2};
   pBalls=[ball];
-
   function tick(){
     ball.vy+=0.38; ball.x+=ball.vx; ball.y+=ball.vy;
     pPegs.forEach(p=>{
@@ -1753,6 +1998,11 @@ async function playRPS(choice){
     setGMsg('rpsMsg',`You lose! -$${bet}`,'lose');
   }
 }
+
+// ============================================================
+// SHARED HELPERS
+// ============================================================
+function setGMsg(id,txt,cls=''){const e=document.getElementById(id);if(!e)return;e.textContent=txt;e.className='g-msg '+cls;}
 </script>
 </body>
 </html>
